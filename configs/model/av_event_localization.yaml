@@ -1,0 +1,39 @@
+# @package model
+
+_target_: src.models.av_event_localization.AVEventLocalizationModel
+
+audio_encoder:
+  _target_: src.models.encoders.AudioEncoder
+  model_name: "facebook/wav2vec2-base"
+  freeze_encoder: false
+  output_dim: 768
+
+visual_encoder:
+  _target_: src.models.encoders.VisualEncoder
+  model_name: "resnet50"
+  pretrained: true
+  freeze_backbone: false
+  output_dim: 2048
+
+fusion:
+  _target_: src.models.fusion.CrossAttentionFusion
+  audio_dim: 768
+  visual_dim: 2048
+  hidden_dim: 512
+  num_heads: 8
+  num_layers: 4
+  dropout: 0.1
+
+temporal_encoder:
+  _target_: src.models.temporal.TemporalTransformer
+  input_dim: 512
+  hidden_dim: 512
+  num_heads: 8
+  num_layers: 6
+  dropout: 0.1
+
+event_classifier:
+  _target_: src.models.classifiers.EventClassifier
+  input_dim: 512
+  num_classes: 10
+  dropout: 0.1

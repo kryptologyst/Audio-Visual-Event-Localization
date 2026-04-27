@@ -1,0 +1,17 @@
+# @package eval
+
+metrics:
+  - "accuracy"
+  - "f1"
+  - "precision"
+  - "recall"
+  - "temporal_iou"
+  - "audio_visual_sync"
+
+# Temporal evaluation
+temporal_tolerance: 0.5  # seconds
+
+# Visualization
+save_predictions: true
+save_attention_maps: true
+num_samples_to_visualize: 10

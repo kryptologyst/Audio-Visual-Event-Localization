@@ -1,0 +1,20 @@
+# @package data
+
+_target_: src.data.dataset.AVEventDataset
+
+data_dir: "data"
+split: "train"
+audio_sample_rate: 16000
+video_fps: 30
+max_audio_length: 10.0
+max_video_length: 10.0
+
+# Data augmentation
+audio_augment:
+  noise_factor: 0.1
+  time_shift: 0.1
+
+video_augment:
+  horizontal_flip: 0.5
+  color_jitter: 0.1
+  temporal_crop: 0.1
